@@ -1,28 +1,30 @@
-import os
+import sqlite3
 from flask import Flask, request, jsonify
 from flask_restful import Resource, Api
-from sqlalchemy import create_engine
-from json import dumps
-import sqlite3
-
-DB_NAME = '/Users/farazrahman/db-driven-api/interview.db'
-
-sqlite_connection = sqlite3.connect(DB_NAME)
-cursor = sqlite_connection.cursor()
 
 app = Flask(__name__)
 api = Api(app)
 
-@app.route('/', methods=['GET'])
-def get_project():
-    with sqlite3.connect(DB_NAME) as connection:
-        project_id = 'Gp0072749'
-        cursor = connection.cursor()
-        project = cursor.execute("select * from sp_ap_table where project_gold_id = (?)", (project_id,))
+DB_NAME = 'interview.db'
 
-        return jsonify(list(project))
+class ProjectManager(Resource):
+    @staticmethod
+    def get():
+        with sqlite3.connect(DB_NAME) as con:
+            cursor = con.cursor()
+            try:
+                project_gold_id = request.args['project_gold_id']
+            except Exception as _:
+                project_gold_id = None
 
+            if not project_gold_id:
+                projects = cursor.execute("select * from sp_ap_rpt").fetchall()
+                return jsonify(list(projects))
+            project = cursor.execute("select * from sp_ap_rpt where project_gold_id = (?)", (project_gold_id,))
+            return jsonify(list(project))
+
+
+api.add_resource(ProjectManager, '/api/projects')
 
 if __name__ == '__main__':
-    app.debug = True
-    app.run()
+    app.run(debug=True)
