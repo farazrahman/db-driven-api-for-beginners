@@ -1,18 +1,23 @@
-import pandas as pd
 import os
 import sqlite3
-from transform import transform_analysis_data, transform_projects_data
+from data_ingestion_ETL.transform import transform_analysis_data, transform_projects_data
 
-DB_NAME = '/Users/farazrahman/db-driven-api/interview.db'
+# change the directory to access the db location for data ingestion
+path_parent = os.path.dirname(os.getcwd())
+os.chdir(path_parent)
+DB_NAME = 'interview.db'
+DB_PATH = os.path.join(path_parent, DB_NAME)
 
 
+# create a connection with already built sqlite db
 def create_connection():
-    sqlite_connection = sqlite3.connect(DB_NAME)
+    sqlite_connection = sqlite3.connect(DB_PATH)
     cursor = sqlite_connection.cursor()
 
     return sqlite_connection, cursor
 
 
+# load the ap csv file as one table in the db
 def load_ap_data(filename: str):
     connection, cursor = create_connection()
     analysis_df = transform_analysis_data(filename=filename)
@@ -28,7 +33,7 @@ def load_ap_data(filename: str):
 
     connection.close()
 
-
+# load the sp csv file into 5 different tables
 def load_sp_data(filename: str):
     connection, cursor = create_connection()
     ncbi, projects, sequence, studies = transform_projects_data(filename=filename)
@@ -85,30 +90,8 @@ def load_sp_data(filename: str):
     connection.close()
 
 
-sp_ap_table = """ SELECT p.project_gold_id, p.project_name, p.project_status, 
-                         a.gold_analysis_project_type, COUNT(a.analysis_gold_id) as analysis_count
-                  FROM projects p
-                  JOIN analysis a ON p.project_gold_id = a.project_gold_id
-                  GROUP BY p.project_gold_id, a.gold_analysis_project_type"""
-
-
-def load_sp_ap_table():
-    connection, cursor = create_connection()
-
-    agg_list = list(cursor.execute(sp_ap_table))
-    print(agg_list)
-    try:
-        cursor.executemany("INSERT INTO main.sp_ap_table(project_gold_id, project_name, project_status, "
-                           "gold_analysis_project_type,analysis_count) VALUES (?,?,?,?,?)", agg_list)
-        connection.commit()
-        print('data ingested')
-    except Exception as e:
-        print(str(e))
-    connection.close()
-
 
 if __name__ == '__main__':
-    load_ap_data(filename='data/20220125_Ex_ap_data.csv')
+    load_ap_data(filename='data_ingestion_ETL/data/20220125_Ex_ap_data.csv')
 
-    load_sp_data(filename='data/20220125_Ex_sp_data.csv')
-    load_sp_ap_table()
+    load_sp_data(filename='data_ingestion_ETL/data/20220125_Ex_sp_data.csv')
