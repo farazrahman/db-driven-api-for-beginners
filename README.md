@@ -1,9 +1,6 @@
 # db-driven-api
 ### About the Project:
-
-1. This project is about building a local database in sqlite. 
-2. Using DDL and DML to create, load, query, and manipulate database tables and views. 
-3. Developing a web service to expose the database table for further analysis and use.
+This project is about building a local database in sqlite. Using DDL and DML to create, load, query, and manipulate database tables and views. Developing a web service to expose the database table for further analysis and use.
 
 ### About the Data:
 The data provided includes 2 csv files;
@@ -45,7 +42,7 @@ db-driven-api:
    2. load.py
 
 ### Instructions for execution
-To execute the app follow the steps below:
+To execute the project follow the steps below:
 NOTE- IDE used Pycharm
 
 1. Clone the repository
