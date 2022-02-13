@@ -68,7 +68,7 @@ def create_tables(list_of_tables: List[str]):
 
 
 if __name__ == '__main__':
-    # # first drop tables if required else keep it commented
+    # first drop tables if required else keep it commented
     # sqlite_connection = sqlite3.connect(DB_NAME)
     # cursor = sqlite_connection.cursor()
     # cursor.execute('''DROP TABLE IF EXISTS analysis;''')
@@ -76,7 +76,7 @@ if __name__ == '__main__':
     # cursor.execute('''DROP TABLE IF EXISTS projects;''')
     # cursor.execute('''DROP TABLE IF EXISTS sequence;''')
     # cursor.execute('''DROP TABLE IF EXISTS studies;''')
-    # cursor.execute('''DROP VIEW IF EXISTS sp_ap_table;''')
+    # cursor.execute('''DROP VIEW IF EXISTS sp_ap_rpt;''')
     # sqlite_connection.close()
 
     # create tables in the db
