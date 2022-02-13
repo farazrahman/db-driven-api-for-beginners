@@ -7,12 +7,13 @@ DB_NAME = 'interview.db'
 # This new table or view joins the sp_table and ap_table on the project_gold_id, groups the project by analysis type and
 # counts the total number of analysis undertaken under each project and analysis type
 sp_ap_rpt = """ CREATE VIEW sp_ap_rpt 
-                  AS 
-                  SELECT p.project_gold_id, p.project_name, p.project_status, 
-                         a.gold_analysis_project_type, COUNT(a.analysis_gold_id) as analysis_count
-                  FROM projects p
-                  JOIN analysis a ON p.project_gold_id = a.project_gold_id
-                  GROUP BY p.project_gold_id, a.gold_analysis_project_type"""
+                AS 
+                SELECT p.project_gold_id, p.project_name, p.project_status, at.analysis_type,
+                       COUNT(a.analysis_gold_id) as analysis_count
+                FROM projects p
+                JOIN analysis a ON p.project_gold_id = a.project_gold_id
+                JOIN analysis_type at ON at.analysis_type_id = a.analysis_type_id
+                GROUP BY p.project_gold_id, at.analysis_type"""
 
 
 def create_sp_ap_view(sql_command: str):
