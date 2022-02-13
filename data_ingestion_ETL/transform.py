@@ -2,6 +2,10 @@ import pandas as pd
 
 
 def transform_analysis_data(filename: str):
+    """
+    Transforms the Ex_ap file by renaming the columns and removing unwanted columns
+    :param filename:  path reference string of the csv file
+    """
     analysis_df = pd.read_csv(filename)
     analysis_df.rename(columns={'gold_id': 'analysis_gold_id',
                                 'project_gold_ids': 'project_gold_id'},
@@ -12,6 +16,10 @@ def transform_analysis_data(filename: str):
 
 
 def transform_projects_data(filename: str):
+    """
+    Transforms the Ex_sp file and splits into 4 different tables for ingestion
+    :param filename: path reference string of the csv file
+    """
     sp_df = pd.read_csv(filename)
     sp_df = sp_df.loc[:, ~sp_df.columns.str.contains('^Unnamed')]
     sp_df.rename(columns={'gold_id': 'project_gold_id'}, inplace=True)

@@ -11,6 +11,10 @@ DB_PATH = os.path.join(path_parent, DB_NAME)
 
 # create a connection with already built sqlite db
 def create_connection():
+    """
+    creates a sqlite db connection and cursor object to execute sql commands in python
+    :return: DB connection and cursor object
+    """
     sqlite_connection = sqlite3.connect(DB_PATH)
     cursor = sqlite_connection.cursor()
 
@@ -19,6 +23,10 @@ def create_connection():
 
 # load the ap csv file as one table in the db
 def load_ap_data(filename: str):
+    """
+    Populates the analysis table with given data
+    :param filename: path reference string of the csv file
+    """
     connection, cursor = create_connection()
     analysis_df = transform_analysis_data(filename=filename)
     lst = analysis_df.values.tolist()
@@ -33,8 +41,13 @@ def load_ap_data(filename: str):
 
     connection.close()
 
+
 # load the sp csv file into 5 different tables
 def load_sp_data(filename: str):
+    """
+    Populates the projects table, ncbi table, sequence table and studies table with given data
+    :param filename: path reference string of the csv file
+    """
     connection, cursor = create_connection()
     ncbi, projects, sequence, studies = transform_projects_data(filename=filename)
 
@@ -88,7 +101,6 @@ def load_sp_data(filename: str):
     _load_sequence_data()
     _load_studies_data()
     connection.close()
-
 
 
 if __name__ == '__main__':
