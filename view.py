@@ -15,12 +15,16 @@ sp_ap_rpt = """ CREATE VIEW sp_ap_rpt
                   GROUP BY p.project_gold_id, a.gold_analysis_project_type"""
 
 
-def create_sp_ap_view():
+def create_sp_ap_view(sql_command: str):
+    """
+    This function connects to the database and creates a view table by using the required sql command
+    :param sql_command: sql command string
+    """
     sqlite_connection = sqlite3.connect(DB_NAME)
     cursor = sqlite_connection.cursor()
 
     try:
-        cursor.execute(sp_ap_rpt)
+        cursor.execute(sql_command)
         sqlite_connection.commit()
         print('sp_ap_view created')
     except Exception as e:
@@ -29,4 +33,4 @@ def create_sp_ap_view():
 
 
 if __name__ == '__main__':
-    create_sp_ap_view()
+    create_sp_ap_view(sp_ap_rpt)
