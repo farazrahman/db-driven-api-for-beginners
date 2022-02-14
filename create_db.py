@@ -5,7 +5,7 @@ from typing import List
 DB_NAME = "interview.db"
 
 
-# The below code tries to break the Ex_sp_data into 5 different tables by project_gold_id:
+# The below code tries to break the Ex_sp_data into 4 different tables by project_gold_id:
 
 # sequence table- contains details of sequencing strategy, sequencing status and centers for each project id
 sequence_table = """CREATE TABLE IF NOT EXISTS sequence ([project_gold_id] VARCHAR PRIMARY KEY NOT NULL,
