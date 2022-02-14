@@ -40,6 +40,7 @@ db-driven-api:
 6. data_ingestion_ETL: package containing the ETL pipeline preparation code
    1. transform.py
    2. load.py
+   3. classification_mapper.py
 
 ### Instructions for execution
 To execute the project follow the steps below:
