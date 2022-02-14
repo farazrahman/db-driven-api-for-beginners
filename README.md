@@ -26,7 +26,7 @@ The project has following three elements:
    2. transform.py- used as an import in the subsequent step, performs steps like renaming columns, eliminating unwanted or additional columns.
    3. load.py- connects to the db created in step 1 and loads the data. The DDL and DML functions are integrated in python code. 
 2. DB denormalization to create a view:
-   1. view.py - creates a combined view/ report from the original tables as sp_ap_table.
+   1. view.py - creates a combined view/ report from the original tables as sp_ap_rpt.
 3. create a web service:
    1. app.py - web service using Flask framework  that hooks up to ‘sp_ap_rpt’ and take an input project id (Gpxxxxx) to return a JSON output containing the values from the  underlying table
 
@@ -35,16 +35,17 @@ db-driven-api:
 1. README.md: read me file
 2. requirements.txt
 3. create_db.py
-4. view.py
-5. app.py
-6. data_ingestion_ETL: package containing the ETL pipeline preparation code
+4. data_ingestion_ETL: package containing the ETL pipeline preparation code
    1. transform.py
    2. load.py
    3. classification_mapper.py
+5. view.py
+6. app.py
+
 
 ### Instructions for execution
 To execute the project follow the steps below:
-NOTE- IDE used Pycharm
+NOTE: Pycharm is used as IDE
 
 1. Clone the repository
 2. Set up a virtual environment in the project's root directory
@@ -52,7 +53,7 @@ NOTE- IDE used Pycharm
       1. python3 -m virtualenv venv
       2. source venv/bin/activate
       3. pip3 install -r requirements.txt
-3. To create a db and required tables run create_db.py in the project's root directory
+3. To create a db and the required tables run create_db.py in the project's root directory
 4. To populate the db with data run load.py in the directory /data_ingestion_ETL/load.py
 5. To create a view of the sp_ap_rpt run view.py in the project's root directory
 6. To create a web service, run app.py in the project's root directory
