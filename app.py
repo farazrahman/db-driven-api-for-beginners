@@ -23,7 +23,8 @@ class ProjectManager(Resource):
             cursor = con.cursor()
             try:
                 project_gold_id = request.args['project_gold_id']
-            except Exception as _:
+            except Exception as e:
+                print(str(e))
                 project_gold_id = None
 
             if not project_gold_id:

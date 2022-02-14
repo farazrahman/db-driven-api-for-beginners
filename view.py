@@ -2,10 +2,10 @@ import sqlite3
 
 DB_NAME = 'interview.db'
 
-# The following block attempts to follow the instructions in the part-2 of the project i.e.
-# denormalizing the table and creating a combined report from the original tables as sp_ap_table.
-# This new table or view joins the sp_table and ap_table on the project_gold_id, groups the project by analysis type and
-# counts the total number of analysis undertaken under each project and analysis type
+# The following code block attempts to follow the instructions in the part-2 of the project i.e.
+# denormalizing the table and creating a combined report from the original tables as sp_ap_rpt.
+# This new table or view joins the projects table and the analysis table on project_gold_id, analysis_type_id and groups
+# the project by analysis type and counts the total number of analysis undertaken under each project and analysis type
 sp_ap_rpt = """ CREATE VIEW sp_ap_rpt 
                 AS 
                 SELECT p.project_gold_id, p.project_name, p.project_status, at.analysis_type,

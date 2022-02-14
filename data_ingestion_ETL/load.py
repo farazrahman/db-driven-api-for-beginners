@@ -1,8 +1,6 @@
 import os
 import sqlite3
-
 import pandas as pd
-
 from data_ingestion_ETL.transform import transform_analysis_data, transform_projects_data
 from data_ingestion_ETL.classification_mapper import analysis_type_mapper
 
@@ -13,7 +11,7 @@ DB_NAME = 'interview.db'
 DB_PATH = os.path.join(path_parent, DB_NAME)
 
 
-# create a connection with already built sqlite db
+# create a connection with already built sqlite db by giving the db path
 def create_connection():
     """
     creates a sqlite db connection and cursor object to execute sql commands in python
@@ -46,7 +44,7 @@ def load_ap_data(filename: str):
     connection.close()
 
 
-# load the sp csv file into 5 different tables
+# load the sp csv file into 4 different tables
 def load_sp_data(filename: str):
     """
     Populates the projects table, ncbi table, sequence table and studies table with given data
@@ -107,6 +105,9 @@ def load_sp_data(filename: str):
 
 
 def load_mapping_tables():
+    """
+    Load the analysis_type mapping table
+    """
     connection, cursor = create_connection()
 
     def _load_analysis_type():
