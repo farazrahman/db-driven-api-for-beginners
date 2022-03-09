@@ -2,7 +2,7 @@ import sqlite3
 from typing import List
 
 # Declare the DB name
-DB_NAME = "interview.db"
+DB_NAME = "foo-database.db"
 
 
 # The below code tries to break the Ex_sp_data into 4 different tables by project_gold_id:

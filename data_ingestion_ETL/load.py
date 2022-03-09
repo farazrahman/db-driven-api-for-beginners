@@ -7,7 +7,7 @@ from data_ingestion_ETL.classification_mapper import analysis_type_mapper
 # change the directory to access the db location for data ingestion
 path_parent = os.path.dirname(os.getcwd())
 os.chdir(path_parent)
-DB_NAME = 'interview.db'
+DB_NAME = 'foo-database.db'
 DB_PATH = os.path.join(path_parent, DB_NAME)
 
 

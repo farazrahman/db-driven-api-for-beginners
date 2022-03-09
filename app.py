@@ -5,7 +5,7 @@ from flask_restful import Resource, Api
 app = Flask(__name__)
 api = Api(app)
 
-DB_NAME = 'interview.db'
+DB_NAME = 'foo-database.db'
 
 
 class ProjectManager(Resource):

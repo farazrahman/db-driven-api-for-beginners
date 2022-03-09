@@ -1,6 +1,6 @@
 import sqlite3
 
-DB_NAME = 'interview.db'
+DB_NAME = 'foo-database.db'
 
 # The following code block attempts to follow the instructions in the part-2 of the project i.e.
 # denormalizing the table and creating a combined report from the original tables as sp_ap_rpt.
